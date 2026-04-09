@@ -4,9 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/icons8-red-apple-16.png" type="image/png">
-    <title>Qualidade da Maçã</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Preditor de Qualidade da Maçã</title>
 </head>
 <body>
-    <h1>Até o momento está tudo certo!</h1>
+    <div class="header-container">
+        <img src="img/header-image.png" alt="Pomar de Maçãs" class="header-image">
+        <h1>Bem-vindo ao Preditor de Qualidade da Maçã!</h1>
+        <p>Este serviço foi pensado para produtores de maçãs que desejam verificar a qualidade de seus produtos. Basta clicar em "Nova Predição", preencher as características do fruto e nossa ferramenta fará a análise.</p>
+        <button id="open-modal-btn" class="action-button-primary">Nova Predição</button>
+    </div>
+
+    <div class="records-container">
+        <div class="records-header">
+            <h2>Registros de Predição</h2>
+        </div>
+        <table id="records-table">
+            <thead>
+                <tr>
+                    <th>Produtor</th>
+                    <th>Safra</th>
+                    <th>Tamanho</th>
+                    <th>Peso</th>
+                    <th>Doçura</th>
+                    <th>Crocância</th>
+                    <th>Suculência</th>
+                    <th>Maturação</th>
+                    <th>Acidez</th>
+                    <th>Qualidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="records-table-body">
+                <!-- As linhas da tabela serão inseridas aqui via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- O Modal do Formulário -->
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Preditor de Qualidade da Maçã</h2>
+            <form id="prediction-form">
+                <div class="form-group">
+                    <label for="producer_name">Nome do Produtor</label>
+                    <input type="text" id="producer_name" name="producer_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="harvest">Safra</label>
+                    <input type="text" id="harvest" name="harvest" required>
+                </div>
+                <div class="form-group">
+                    <label for="size">Tamanho</label>
+                    <input type="number" id="size" name="size" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Peso</label>
+                    <input type="number" id="weight" name="weight" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="sweetness">Doçura</label>
+                    <input type="number" id="sweetness" name="sweetness" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="crunchiness">Crocância</label>
+                    <input type="number" id="crunchiness" name="crunchiness" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="juiciness">Suculência</label>
+                    <input type="number" id="juiciness" name="juiciness" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="ripeness">Maturação</label>
+                    <input type="number" id="ripeness" name="ripeness" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="acidity">Acidez</label>
+                    <input type="number" id="acidity" name="acidity" step="any" required>
+                </div>
+                <button type="submit">Prever Qualidade</button>
+            </form>
+            <div id="result">
+                O resultado da predição aparecerá aqui.
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js" defer></script>
+    <script src="js/scripts.js" defer></script>
 </body>
 </html>
