@@ -2,6 +2,7 @@
 from flask import redirect
 from flask_cors import CORS
 from flask_openapi3 import OpenAPI, Info, Tag
+from sqlalchemy.exc import SQLAlchemyError
 
 from model import Session, AppleQuality, Preprocessador, Pipeline
 from schemas import ErrorSchema, apresenta_predicoes, \
@@ -173,7 +174,7 @@ def add_prediction(form: AppleQualitySchema):
         # Concluindo transação
         return apresenta_predicao(predicao), 200
 
-    except Exception as e:
+    except SQLAlchemyError as e:
         error_msg = "Não foi possível salvar nova predição :/"
         print(e)
         return {"message": error_msg}, 400
