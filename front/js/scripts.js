@@ -25,11 +25,17 @@ const insertRecord = (item) => {
     createCell(item.juiciness);
     createCell(item.ripeness);
     createCell(item.acidity);
-    const qualityText = item.quality === 0 ? 'Bom' : (item.quality === 1 ? 'Ruim' : 'N/A');
-    createCell(`<b>${qualityText}</b>`);
 
+    const qualityMap = { 0: 'Bom', 1: 'Ruim' };
+    const qualityText = qualityMap[item.quality] || 'N/A';
+    const qualityCell = createCell(`<b>${qualityText}</b>`);
 
-
+    // Adiciona uma classe CSS para estilização com base na qualidade
+    if (item.quality === 0) {
+        qualityCell.classList.add('quality-good');
+    } else if (item.quality === 1) {
+        qualityCell.classList.add('quality-bad');
+    }
 
     // Cria o botão de deletar e adiciona o event listener
     const actionsCell = row.insertCell();
@@ -59,7 +65,7 @@ const loadRecords = async () => {
         data.predictions.forEach(item => insertRecord(item));
     } catch (error) {
         console.error("Erro ao carregar registros:", error);
-        // Opcional: exibir uma mensagem de erro na interface
+        alert("Não foi possível carregar os registros. Verifique a conexão com a API.");
     }
 };
 
@@ -91,19 +97,13 @@ document.getElementById('prediction-form').addEventListener('submit', async (eve
 
     const form = event.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    // Converte campos numéricos para o tipo float
-    const numericFields = ['size', 'weight', 'sweetness', 'crunchiness', 'juiciness', 'ripeness', 'acidity'];
-    numericFields.forEach(field => {
-        if (data[field]) data[field] = parseFloat(data[field]);
-    });
 
     try {
         const response = await fetch(`${CONFIG.API_BASE_URL}/predictions`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+            // Ao enviar FormData, o browser define o Content-Type como 'multipart/form-data'
+            // com o boundary correto. Não é necessário definir o header 'Content-Type' manualmente.
+            body: formData,
         });
 
         const resultDiv = document.getElementById('result');

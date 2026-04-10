@@ -1,5 +1,5 @@
 """Schema de representação das frutas"""
-from typing import List
+from typing import List, Union
 from pydantic import BaseModel
 
 from model.apple_quality import AppleQuality
@@ -9,7 +9,7 @@ class AppleQualitySchema(BaseModel):
     """ Define como uma nova fruta a ser inserida deve ser representada
     """
     farmer: str = "João Silva"
-    crop: str = "2023/2024"
+    crop: Union[str, int] = "2023/2024"
     size: float = -0.5
     weight: float = -1.2
     sweetness: float = -2.3
