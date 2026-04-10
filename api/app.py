@@ -106,7 +106,7 @@ def delete_prediction(query: AppleQualityDelSchema):
 # Rota de adição de predições
 @app.post('/predictions', tags=[predictions_tag], \
           responses={"200": AppleQualityViewSchema, "400": ErrorSchema})
-def add_prediction(form: AppleQualitySchema):
+def add_prediction(body: AppleQualitySchema):
     """
     Adiciona uma nova predição no banco de dados.
 
@@ -129,19 +129,19 @@ def add_prediction(form: AppleQualitySchema):
     preprocessador = Preprocessador()
     pipeline = Pipeline()
 
-    # Recuperando os dados do formulário
-    farmer = form.farmer
-    crop = str(form.crop)
-    size = form.size
-    weight = form.weight
-    sweetness = form.sweetness
-    crunchiness = form.crunchiness
-    juiciness = form.juiciness
-    ripeness = form.ripeness
-    acidity = form.acidity
+    # Recuperando os dados do corpo da requisição
+    farmer = body.farmer
+    crop = str(body.crop)
+    size = body.size
+    weight = body.weight
+    sweetness = body.sweetness
+    crunchiness = body.crunchiness
+    juiciness = body.juiciness
+    ripeness = body.ripeness
+    acidity = body.acidity
 
     # Preparando os dados para o modelo
-    x_input = preprocessador.preparar_formulario(form)
+    x_input = preprocessador.preparar_formulario(body)
 
     # Carregando o modelo
     model_path = "./MachineLearning/pipelines/svm_apple_quality.pkl"

@@ -97,13 +97,21 @@ document.getElementById('prediction-form').addEventListener('submit', async (eve
 
     const form = event.target;
     const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Converte campos numéricos para o tipo float, pois JSON não tem tipo de formulário
+    const numericFields = ['size', 'weight', 'sweetness', 'crunchiness', 'juiciness', 'ripeness', 'acidity'];
+    numericFields.forEach(field => {
+        if (data[field]) data[field] = parseFloat(data[field]);
+    });
 
     try {
         const response = await fetch(`${CONFIG.API_BASE_URL}/predictions`, {
             method: 'POST',
-            // Ao enviar FormData, o browser define o Content-Type como 'multipart/form-data'
-            // com o boundary correto. Não é necessário definir o header 'Content-Type' manualmente.
-            body: formData,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
         });
 
         const resultDiv = document.getElementById('result');

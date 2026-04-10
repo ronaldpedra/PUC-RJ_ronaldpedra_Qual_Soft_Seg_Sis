@@ -22,16 +22,16 @@ class Preprocessador:
         y = dados[:, -1]
         return train_test_split(x, y, test_size=percentual_teste, random_state=seed)
 
-    def preparar_formulario(self, form):
+    def preparar_formulario(self, prediction_input):
         """Prepara os dados do formulário"""
         x_input = np.array([
-            form.size,
-            form.weight,
-            form.sweetness,
-            form.crunchiness,
-            form.juiciness,
-            form.ripeness,
-            form.acidity
+            prediction_input.size,
+            prediction_input.weight,
+            prediction_input.sweetness,
+            prediction_input.crunchiness,
+            prediction_input.juiciness,
+            prediction_input.ripeness,
+            prediction_input.acidity
         ]).reshape(1, -1)
         return x_input
 
