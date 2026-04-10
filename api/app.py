@@ -130,7 +130,7 @@ def add_prediction(form: AppleQualitySchema):
 
     # Recuperando os dados do formulário
     farmer = form.farmer
-    crop = form.crop
+    crop = str(form.crop)
     size = form.size
     weight = form.weight
     sweetness = form.sweetness
