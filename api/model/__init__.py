@@ -8,6 +8,9 @@ from model.base import Base
 from model.apple_quality import AppleQuality
 from model.preprocessador import Preprocessador
 from model.pipeline import Pipeline
+from model.carregador import Carregador
+from model.modelo import Model
+from model.avaliador import Avaliador
 
 
 # URL de acesso ao banco de dados
