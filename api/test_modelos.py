@@ -8,11 +8,11 @@ avaliador = Avaliador()
 Pipeline = Pipeline()
 
 # Parâmetros
-url_dados = './MachineLearning/data/test_dataset_apple_quality.csv'
-colunas = ['Size', 'Weight', 'Sweetness', 'Crunchiness', 'Juiciness', 'Ripeness', 'Acidity', 'Label']
+URL_DADOS = './MachineLearning/data/test_dataset_apple_quality.csv'
+COLUNAS = ['Size', 'Weight', 'Sweetness', 'Crunchiness', 'Juiciness', 'Ripeness', 'Acidity', 'Label']
 
 # Carga dos dados
-dataset = carregador.carregar_dados(url_dados, colunas)
+dataset = carregador.carregar_dados(URL_DADOS, COLUNAS)
 array = dataset.values
 x = array[:,0:-1]
 y = array[:,-1]
@@ -26,5 +26,17 @@ def test_modelo_rf():
 
     # Obtendo as métricas da RF
     acuracia_rf = avaliador.avaliar(modelo_rf, x, y)
-    assert acuracia_rf >= 0.704
+    # assert acuracia_rf >= 0.704
     assert acuracia_rf >= 0.77875
+
+def test_modelo_svm():
+    """Testando o modelo SVM."""
+    # Importando o modelo SVM
+    svm_path = './MachineLearning/models/svm_apple_quality.pkl'
+    modelo_svm = modelo.carrega_modelo(svm_path)
+
+    # Obtendo as métricas da RF
+    acuracia_svm = avaliador.avaliar(modelo_svm, x, y)
+    assert acuracia_svm >= 0.704
+    # assert acuracia_svm >= 0.77875
+
