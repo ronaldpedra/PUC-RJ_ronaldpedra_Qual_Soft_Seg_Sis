@@ -39,4 +39,3 @@ def test_modelo_svm():
     acuracia_svm = avaliador.avaliar(modelo_svm, x, y)
     assert acuracia_svm >= 0.704
     # assert acuracia_svm >= 0.77875
-

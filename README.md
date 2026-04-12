@@ -17,19 +17,22 @@ Este projeto é um Mínimo Produto Viável (MVP) desenvolvido para a pós-gradua
 
 ```
 .
-├── api/                # Contém a aplicação backend em Flask
+├── api/                    # Contém a aplicação backend em Flask
+│   ├── database/           # Diretório onde o banco de dados SQLite é armazenado
+│   ├── MachineLearning/    # Contém o pipeline do modelo de Machine Learning
+│   │   └── pipelines/
+│   │       └── svm_apple_quality.pkl
 │   ├── model/
 │   ├── schemas/
 │   ├── app.py
-│   └── test_api.py
-├── database/           # Diretório onde o banco de dados SQLite é armazenado
-├── front/              # Contém os arquivos do frontend
+│   ├── test_api.py
+│   └── test_modelos.py
+│
+├── front/                  # Contém os arquivos do frontend
 │   ├── css/
 │   ├── js/
 │   └── index.html
-└── MachineLearning/    # Contém o pipeline do modelo de Machine Learning
-    └── pipelines/
-        └── svm_apple_quality.pkl
+
 ```
 
 ## 🏁 Como Executar
@@ -41,6 +44,9 @@ Este projeto é um Mínimo Produto Viável (MVP) desenvolvido para a pós-gradua
 ### Instalação e Execução
 
 1.  Instale as dependências necessárias (recomenda-se o uso de um ambiente virtual):
+
+IMPORTANTE: o ambiente virtual deve ser criado dentro da pasta api.
+
     ```bash
     pip install Flask Flask-Cors Flask-OpenAPI3 SQLAlchemy sqlalchemy-utils pydantic scikit-learn
     ```
